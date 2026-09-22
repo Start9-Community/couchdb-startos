@@ -24,7 +24,7 @@ jobs:
     outputs:
       targets: ${{ steps.set.outputs.targets }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: set
         run: |
           targets=$(make -s print-TARGETS | tr ' ' '\n' | grep -v '^$' | jq -R . | jq -cs .)
@@ -39,9 +39,9 @@ jobs:
       matrix:
         target: ${{ fromJSON(needs.prepare.outputs.targets) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
@@ -52,7 +52,7 @@ jobs:
       # packing the aarch64 target reads an arm64 image's filesystem. Registering
       # QEMU/binfmt makes that reliable regardless of how start-cli extracts it.
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Install start-cli
         env:
@@ -98,7 +98,7 @@ jobs:
         run: make ${{ matrix.target }}
 
       - name: Upload package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: s9pk-${{ matrix.target }}
           path: '*.s9pk'
@@ -114,7 +114,7 @@ jobs:
       contents: write
     steps:
       - name: Download all packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: dist
           merge-multiple: true
