@@ -9,7 +9,9 @@ export const showCredentials = sdk.Action.withoutInput(
   // metadata
   async ({ effects }) => ({
     name: i18n('Show Credentials'),
-    description: i18n('Display the CouchDB admin credentials for Obsidian LiveSync'),
+    description: i18n(
+      'Display the CouchDB admin credentials for Obsidian LiveSync',
+    ),
     warning: null,
     allowedStatuses: 'any',
     group: null,

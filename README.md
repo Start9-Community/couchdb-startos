@@ -28,7 +28,7 @@ make install
 
 ### Releases (install by URL)
 
-Pushing a version tag (e.g. `v3.4.0-10`) triggers the [release workflow](.github/workflows/release.yml), which builds both architectures and attaches `couchdb_x86_64.s9pk` and `couchdb_aarch64.s9pk` to a GitHub Release. To install without building locally, download the `.s9pk` for your server's architecture from the [Releases page](https://github.com/nfealey/couchdb-startos/releases) (or copy its URL) and use **System → Sideload** in StartOS.
+Pushing a version tag (e.g. `v3.5.2-0`) triggers the [release workflow](.github/workflows/release.yml), which builds both architectures and attaches `couchdb_x86_64.s9pk` and `couchdb_aarch64.s9pk` to a GitHub Release. To install without building locally, download the `.s9pk` for your server's architecture from the [Releases page](https://github.com/nfealey/couchdb-startos/releases) (or copy its URL) and use **System → Sideload** in StartOS.
 
 > Optionally set a `STARTOS_DEVELOPER_KEY` repository secret (the contents of `~/.startos/developer.key.pem`) so every release is signed with the same publisher identity. Without it, each build self-signs with an ephemeral key — still valid and installable.
 

@@ -13,7 +13,9 @@ export const manifest = setupManifest({
   volumes: ['main', 'config'],
   images: {
     main: {
-      source: { dockerTag: 'couchdb:3.4.3' },
+      // 3.5.2.1 is the 3.5.2 source release rebuilt on Erlang/OTP 26.2.5.21
+      // (plus a packaging fix for the -nouveau variant, which we don't use).
+      source: { dockerTag: 'couchdb:3.5.2.1' },
       arch: ['x86_64', 'aarch64'],
     },
   },

@@ -85,10 +85,13 @@ export const compactDatabases = sdk.Action.withoutInput(
         }
         for (const row of body.rows ?? []) {
           const ddoc = row.id.replace(/^_design\//, '')
-          await fetch(`${base}/${encoded}/_compact/${encodeURIComponent(ddoc)}`, {
-            method: 'POST',
-            headers,
-          })
+          await fetch(
+            `${base}/${encoded}/_compact/${encodeURIComponent(ddoc)}`,
+            {
+              method: 'POST',
+              headers,
+            },
+          )
         }
       }
     }

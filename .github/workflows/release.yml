@@ -1,7 +1,7 @@
 name: Release
 
 # Build the .s9pk packages and attach them to a GitHub Release when a version
-# tag is pushed (e.g. `v3.4.0-10`). The attached assets are installable by URL
+# tag is pushed (e.g. `v3.5.2-0`). The attached assets are installable by URL
 # on StartOS via System → Sideload. Also runnable via workflow_dispatch to
 # smoke-test the build without cutting a release.
 on:
