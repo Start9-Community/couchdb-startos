@@ -1,42 +1,44 @@
-# CouchDB Setup Instructions
+# CouchDB
 
-## Initial Setup
+## Documentation
 
-1. Start the CouchDB service
-2. Run the **Show Credentials** action to view your auto-generated admin username and password. A unique password is created automatically on first run — there is no shared default.
-3. (Optional) Run the **Reset Password** action at any time to rotate the password — it works whether the service is running or stopped (a running service is updated live, with no downtime). Afterward, update your Obsidian LiveSync settings with the new password.
+- [Apache CouchDB documentation](https://docs.couchdb.org/en/stable/*) — the upstream reference: Fauxton, configuration, replication and the HTTP API.
+- [LiveSync quick setup](https://github.com/vrtmrz/obsidian-livesync/blob/main/docs/quick_setup.md) — connecting the Obsidian plugin to a CouchDB server.
+- [LiveSync settings](https://github.com/vrtmrz/obsidian-livesync/blob/main/docs/settings.md) — what each plugin setting does.
+- [LiveSync troubleshooting](https://github.com/vrtmrz/obsidian-livesync/blob/main/docs/troubleshooting.md) — fixing sync and connection problems.
 
-## Connecting Obsidian LiveSync
+## What you get on StartOS
 
-1. In Obsidian, go to Settings → Community plugins
-2. Search for and install "Self-hosted LiveSync"
-3. Enable the plugin
-4. Open plugin settings and configure:
+A private CouchDB server that Obsidian's **Self-hosted LiveSync** plugin syncs your vaults through. It is already configured for LiveSync — login required, the Obsidian apps allowed to connect, and large notes and attachments accepted — so there is nothing to set up inside CouchDB itself.
 
-   - **Remote Database URI**: Copy from StartOS interface
+It has two interfaces:
+
+- **CouchDB API** — the address you give LiveSync.
+- **Fauxton UI** — CouchDB's web admin, for browsing databases and documents.
+
+## Getting set up
+
+1. Run the **Set Admin Password** task. Copy the password it shows and keep it somewhere safe — it is shown only once. The username is always `admin`.
+2. Start the service.
+3. In Obsidian, install and enable the **Self-hosted LiveSync** community plugin, then open its setup and choose to connect to CouchDB.
+4. Enter:
+   - **URI**: an address from the **CouchDB API** interface.
    - **Username**: `admin`
-   - **Password**: Your CouchDB password
-   - **Database name**: `obsidian` (will be created automatically)
+   - **Password**: the password from step 1.
+   - **Database name**: any name, for example `obsidian`. LiveSync creates it the first time it connects.
+5. Test the connection, then turn on sync. Repeat steps 3–5 on each device, using the same database name.
 
-5. Click "Test Connection" to verify
-6. Enable "Live Sync" to start syncing
+## Using CouchDB
 
-## Maintenance: Reclaiming Disk Space
+### Fauxton UI
 
-CouchDB keeps old revisions of every document on disk until it compacts. Because Obsidian LiveSync writes a new revision on every change, your database grows over time — and a LiveSync "cleanup"/"rebuild" only *marks* old data for removal; CouchDB doesn't reclaim the space until it compacts.
+Opening the Fauxton UI asks for a username and password first — use `admin` and your admin password. From there you can see each database LiveSync has created, how large it is, and its documents.
 
-Run the **Compact Databases** action periodically (the service can stay running) to compact every database and its view indexes and shrink the on-disk files. It's especially worth running right after a LiveSync cleanup or rebuild. Compaction happens in the background, so large databases may take a few minutes to finish after the action reports.
+### Actions
 
-## Creating Additional Databases
+- **Set Admin Password** — replaces the admin password with a new one. Run it if the password has been exposed or lost. The service needs to be stopped first. Afterwards, update the password in LiveSync on every device.
+- **Compact Databases** — frees disk space. CouchDB keeps old versions of every note until it compacts, and LiveSync saves a new version on every edit, so the database grows over time. Run this now and then, and especially after a LiveSync cleanup or rebuild. It works in the background while the service keeps running, and large databases can take a few minutes to shrink.
 
-If you want separate vaults in different databases:
+## Limitations
 
-1. Open Fauxton UI
-2. Click "Create Database"
-3. Use the new database name in LiveSync settings
-
-## Troubleshooting
-
-- **Connection refused**: Ensure CouchDB is running
-- **Authentication failed**: Verify username/password
-- **CORS errors**: CouchDB should be configured correctly by default
+- Restoring a backup brings back the admin password that was in use when the backup was taken. If you changed it since, update LiveSync on each device or run **Set Admin Password** again.

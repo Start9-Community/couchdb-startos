@@ -5,7 +5,7 @@ export const manifest = setupManifest({
   id: 'couchdb',
   title: 'CouchDB',
   license: 'Apache-2.0',
-  packageRepo: 'https://github.com/nfealey/couchdb-startos',
+  packageRepo: 'https://github.com/Start9-Community/couchdb-startos',
   upstreamRepo: 'https://github.com/apache/couchdb',
   marketingUrl: 'https://couchdb.apache.org/',
   donationUrl: 'https://www.apache.org/foundation/contributing.html',
@@ -13,22 +13,9 @@ export const manifest = setupManifest({
   volumes: ['main', 'config'],
   images: {
     main: {
-      // 3.5.2.1 is the 3.5.2 source release rebuilt on Erlang/OTP 26.2.5.21
-      // (plus a packaging fix for the -nouveau variant, which we don't use).
       source: { dockerTag: 'couchdb:3.5.2.1' },
       arch: ['x86_64', 'aarch64'],
     },
-  },
-  alerts: {
-    // No install alert: credentials are surfaced right after install by an
-    // "important" task (see startos/init/onInstall.ts), not a pre-install popup.
-    install: null,
-    update: null,
-    uninstall: null,
-    restore:
-      'Restoring reverts CouchDB to the data and admin credentials captured in this backup. If you changed your password after this backup was taken, the older password will apply again — run the "Show Credentials" action after restoring to confirm your current login.',
-    start: null,
-    stop: null,
   },
   dependencies: {},
 })
