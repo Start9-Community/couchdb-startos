@@ -4,17 +4,17 @@ import { setInterfaces } from '../interfaces'
 import { versionGraph } from '../versions'
 import { actions } from '../actions'
 import { restoreInit } from '../backups'
-import { onInstall } from './onInstall'
+import { writeConfig } from './writeConfig'
+import { watchCredentials } from './watchCredentials'
 
 export const init = sdk.setupInit(
   restoreInit,
   versionGraph,
+  writeConfig,
   setInterfaces,
   setDependencies,
   actions,
-  // Must come after `actions` so the Show Credentials action is registered
-  // before onInstall raises a task pointing at it.
-  onInstall,
+  watchCredentials,
 )
 
 export const uninit = sdk.setupUninit(versionGraph)
