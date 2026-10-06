@@ -28,7 +28,7 @@ const dict = {
   // actions/compactDatabases.ts
   'Compact Databases': 16,
   'Reclaim disk space by compacting every database and its indexes. CouchDB keeps old document revisions on disk until compaction runs, so this can free significant space after heavy syncing or a LiveSync cleanup.': 17,
-  'Compaction runs in the background and the service keeps serving requests. Large databases may take several minutes to finish.': 18,
+  'Permanently discards the stored contents of old document revisions in every database. Compaction runs in the background and the service keeps serving requests; large databases may take several minutes to finish.': 18,
   'Failed to list databases (HTTP ${status})': 19,
   'Compaction Started': 20,
   'Compaction started for ${count} database(s). Large databases may take a few minutes to finish in the background.': 21,

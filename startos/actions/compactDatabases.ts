@@ -12,7 +12,7 @@ export const compactDatabases = sdk.Action.withoutInput(
       'Reclaim disk space by compacting every database and its indexes. CouchDB keeps old document revisions on disk until compaction runs, so this can free significant space after heavy syncing or a LiveSync cleanup.',
     ),
     warning: i18n(
-      'Compaction runs in the background and the service keeps serving requests. Large databases may take several minutes to finish.',
+      'Permanently discards the stored contents of old document revisions in every database. Compaction runs in the background and the service keeps serving requests; large databases may take several minutes to finish.',
     ),
     allowedStatuses: 'only-running',
     group: null,
