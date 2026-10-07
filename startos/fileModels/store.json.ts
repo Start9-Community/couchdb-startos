@@ -3,7 +3,7 @@ import { sdk } from '../sdk'
 
 export const storeJson = FileHelper.json(
   { base: sdk.volumes.main, subpath: 'store.json' },
-  z.object({
+  z.looseObject({
     adminPassword: z.string().optional().catch(undefined),
   }),
 )

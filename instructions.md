@@ -37,7 +37,7 @@ Opening the Fauxton UI asks for a username and password first — use `admin` an
 ### Actions
 
 - **Set Admin Password** — replaces the admin password with a new one. Run it if the password has been exposed or lost. The service needs to be stopped first. Afterwards, update the password in LiveSync on every device.
-- **Compact Databases** — frees disk space. CouchDB keeps old versions of every note until it compacts, and LiveSync saves a new version on every edit, so the database grows over time. Run this now and then, and especially after a LiveSync cleanup or rebuild. It works in the background while the service keeps running, and large databases can take a few minutes to shrink.
+- **Compact Databases** — frees disk space. CouchDB keeps old versions of every note until it compacts, and LiveSync saves a new version on every edit, so the database grows over time. Run this now and then, and especially after a LiveSync cleanup or rebuild. It asks you to confirm first, because the old versions it clears out cannot be recovered. It works in the background while the service keeps running, and large databases can take a few minutes to shrink.
 
 ## Limitations
 
