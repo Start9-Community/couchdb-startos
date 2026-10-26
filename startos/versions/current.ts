@@ -1,18 +1,18 @@
 import { IMPOSSIBLE, VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '3.5.3:0',
+  version: '3.5.3:1',
   releaseNotes: {
     en_US:
-      '- Updates CouchDB to 3.5.3, a security release that fixes six vulnerabilities, including a denial of service any client can trigger without logging in, and a flaw that let a CouchDB admin run shell commands inside the container. Updating is strongly recommended.',
+      '- Packaging update, with no change to CouchDB itself: moves to StartOS SDK 3.1.0, which carries a fixed version of a validation library this package builds against.',
     es_ES:
-      '- Actualiza CouchDB a 3.5.3, una versión de seguridad que corrige seis vulnerabilidades, entre ellas una denegación de servicio que cualquier cliente puede provocar sin iniciar sesión y un fallo que permitía a un administrador de CouchDB ejecutar comandos de shell dentro del contenedor. Se recomienda encarecidamente actualizar.',
+      '- Actualización de empaquetado, sin cambios en CouchDB: pasa al SDK 3.1.0 de StartOS, que incluye una versión corregida de una biblioteca de validación con la que se compila este paquete.',
     de_DE:
-      '- Aktualisiert CouchDB auf 3.5.3, eine Sicherheitsversion, die sechs Schwachstellen behebt – darunter eine Denial-of-Service-Lücke, die jeder Client ohne Anmeldung auslösen kann, und einen Fehler, durch den ein CouchDB-Administrator Shell-Befehle im Container ausführen konnte. Ein Update wird dringend empfohlen.',
+      '- Paketierungs-Update ohne Änderung an CouchDB selbst: Wechsel auf StartOS SDK 3.1.0, das eine korrigierte Version einer Validierungsbibliothek enthält, gegen die dieses Paket gebaut wird.',
     pl_PL:
-      '- Aktualizuje CouchDB do wersji 3.5.3, wydania bezpieczeństwa naprawiającego sześć luk, w tym odmowę usługi, którą każdy klient może wywołać bez logowania, oraz błąd pozwalający administratorowi CouchDB uruchamiać polecenia powłoki w kontenerze. Aktualizacja jest zdecydowanie zalecana.',
+      '- Aktualizacja pakietu, bez zmian w samym CouchDB: przejście na StartOS SDK 3.1.0, który zawiera poprawioną wersję biblioteki walidacyjnej używanej do budowania tego pakietu.',
     fr_FR:
-      "- Met à jour CouchDB vers 3.5.3, une version de sécurité qui corrige six vulnérabilités, dont un déni de service que tout client peut déclencher sans se connecter et une faille permettant à un administrateur CouchDB d'exécuter des commandes shell dans le conteneur. La mise à jour est fortement recommandée.",
+      '- Mise à jour d’empaquetage, sans changement de CouchDB : passage au SDK StartOS 3.1.0, qui embarque une version corrigée d’une bibliothèque de validation utilisée pour construire ce paquet.',
   },
   migrations: {
     up: async ({ effects }) => {},

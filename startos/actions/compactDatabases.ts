@@ -82,6 +82,7 @@ export const compactDatabases = sdk.Action.withoutInput(
             masked: false,
             copyable: false,
             qr: false,
+            launchable: false,
           },
           ...(failed.length
             ? [
@@ -93,6 +94,7 @@ export const compactDatabases = sdk.Action.withoutInput(
                   masked: false,
                   copyable: false,
                   qr: false,
+                  launchable: false,
                 },
               ]
             : []),
