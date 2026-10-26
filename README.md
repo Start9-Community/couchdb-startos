@@ -32,16 +32,18 @@
 
 ## Image and Container Runtime
 
-The package runs the unmodified Docker official image with its own entrypoint, in a single subcontainer.
+The package runs the Docker official image with its own entrypoint, in a single subcontainer. CouchDB itself is unmodified; the only change is to the image's certificate trust store.
 
 | Property      | Value                                                                              |
 | ------------- | ---------------------------------------------------------------------------------- |
-| Image         | `couchdb` (Docker official image), unmodified                                      |
+| Image         | `couchdb` (Docker official image) via the root `Dockerfile`, CouchDB unmodified    |
 | Architectures | x86_64, aarch64                                                                    |
 | Entrypoint    | Upstream `docker-entrypoint.sh`, which fixes ownership and drops to `couchdb`      |
 | Subcontainer  | `couchdb` — the CouchDB server                                                     |
 
 The entrypoint refuses to start CouchDB when no admin is configured, so the service cannot start until the admin password has been set (see [Tasks](#tasks)).
+
+**The `Dockerfile` removes two withdrawn certificate authorities and does nothing else.** eMudhra's intermediate signing keys were compromised in October 2026 and NSS distrusted three emSign roots; the official image is Debian trixie, which still trusts two of them because Debian has not shipped the removal. The build deselects `emSign Root CA - C1` and `emSign ECC Root CA - C3` with Debian's own `/etc/ca-certificates.conf` mechanism, rebuilds the bundle, and fails if either is still trusted afterwards. `emSign Root CA - G1` is left in place — Mozilla kept it. This is the store CouchDB's replicator reads when `[replicator] verify_ssl_certificates` is turned on; see [Limitations and Differences](#limitations-and-differences). The file is temporary and `UPDATING.md` § The CA override says when to delete it.
 
 ## Volume and Data Layout
 
@@ -128,6 +130,7 @@ A restored instance comes back with the admin password, server `uuid` and cookie
 2. The admin username is always `admin`. Additional users and per-database security can be created through Fauxton or the API as upstream documents.
 3. CORS allows only the Obsidian desktop and mobile origins and `http://localhost`. A browser-based client on another origin needs its origin added to `[cors] origins` through Fauxton's configuration page.
 4. The Nouveau full-text search service is not included.
+5. **Outbound replication does not verify certificates by default.** `[replicator] verify_ssl_certificates` is `false` in CouchDB's own defaults and this package does not override it, so a push or pull replication to an `https://` target accepts any certificate. Turn it on through Fauxton's configuration page if the remote presents a certificate from a public authority; it then checks against the image's trust store, which this package has had two compromised authorities removed from (see [Image and Container Runtime](#image-and-container-runtime)).
 
 ---
 
@@ -135,7 +138,7 @@ A restored instance comes back with the admin password, server `uuid` and cookie
 
 ```yaml
 package_id: couchdb
-image: couchdb
+image: couchdb # via ./Dockerfile; CouchDB unmodified, two withdrawn CAs removed
 architectures: [x86_64, aarch64]
 subcontainers: [couchdb]
 volumes:

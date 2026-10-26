@@ -13,7 +13,11 @@ export const manifest = setupManifest({
   volumes: ['main', 'config'],
   images: {
     main: {
-      source: { dockerTag: 'couchdb:3.5.3' },
+      // Built from the root Dockerfile, which is the official `couchdb` image with two
+      // compromised certificate authorities removed — the upstream tag now lives in its `FROM`
+      // line. This is temporary: when Debian ships a fixed ca-certificates, the Dockerfile goes
+      // and this becomes `dockerTag: 'couchdb:<tag>'` again. UPDATING.md § The CA override.
+      source: { dockerBuild: {} },
       arch: ['x86_64', 'aarch64'],
     },
   },

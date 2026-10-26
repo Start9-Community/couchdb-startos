@@ -1,18 +1,18 @@
 import { IMPOSSIBLE, VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '3.5.3:1',
+  version: '3.5.3:2',
   releaseNotes: {
     en_US:
-      '- Packaging update, with no change to CouchDB itself: moves to StartOS SDK 3.1.0, which carries a fixed version of a validation library this package builds against.',
+      "- Removes two certificate authorities from the image's trust store. eMudhra's signing keys were compromised and the authorities were withdrawn, but the base image still trusted them; CouchDB checks remote replication targets against this store when certificate verification is switched on.\n- Packaging update, with no change to CouchDB itself: moves to StartOS SDK 3.1.0.",
     es_ES:
-      '- Actualización de empaquetado, sin cambios en CouchDB: pasa al SDK 3.1.0 de StartOS, que incluye una versión corregida de una biblioteca de validación con la que se compila este paquete.',
+      '- Elimina dos autoridades de certificación del almacén de confianza de la imagen. Las claves de firma de eMudhra se vieron comprometidas y las autoridades fueron retiradas, pero la imagen base seguía confiando en ellas; CouchDB verifica los destinos de replicación remotos con este almacén cuando la verificación de certificados está activada.\n- Actualización de empaquetado, sin cambios en CouchDB: pasa al SDK 3.1.0 de StartOS.',
     de_DE:
-      '- Paketierungs-Update ohne Änderung an CouchDB selbst: Wechsel auf StartOS SDK 3.1.0, das eine korrigierte Version einer Validierungsbibliothek enthält, gegen die dieses Paket gebaut wird.',
+      '- Entfernt zwei Zertifizierungsstellen aus dem Vertrauensspeicher des Images. Die Signierschlüssel von eMudhra wurden kompromittiert und die Stellen zurückgezogen, doch das Basis-Image vertraute ihnen weiterhin; CouchDB prüft entfernte Replikationsziele gegen diesen Speicher, wenn die Zertifikatsprüfung eingeschaltet ist.\n- Paketierungs-Update ohne Änderung an CouchDB selbst: Wechsel auf StartOS SDK 3.1.0.',
     pl_PL:
-      '- Aktualizacja pakietu, bez zmian w samym CouchDB: przejście na StartOS SDK 3.1.0, który zawiera poprawioną wersję biblioteki walidacyjnej używanej do budowania tego pakietu.',
+      '- Usuwa dwa urzędy certyfikacji z magazynu zaufania obrazu. Klucze podpisujące eMudhra zostały skompromitowane, a urzędy wycofane, lecz obraz bazowy nadal im ufał; CouchDB weryfikuje zdalne cele replikacji wobec tego magazynu, gdy weryfikacja certyfikatów jest włączona.\n- Aktualizacja pakietu, bez zmian w samym CouchDB: przejście na StartOS SDK 3.1.0.',
     fr_FR:
-      '- Mise à jour d’empaquetage, sans changement de CouchDB : passage au SDK StartOS 3.1.0, qui embarque une version corrigée d’une bibliothèque de validation utilisée pour construire ce paquet.',
+      '- Retire deux autorités de certification du magasin de confiance de l’image. Les clés de signature d’eMudhra ont été compromises et les autorités retirées, mais l’image de base leur faisait toujours confiance ; CouchDB vérifie les cibles de réplication distantes avec ce magasin lorsque la vérification des certificats est activée.\n- Mise à jour d’empaquetage, sans changement de CouchDB : passage au SDK StartOS 3.1.0.',
   },
   migrations: {
     up: async ({ effects }) => {},

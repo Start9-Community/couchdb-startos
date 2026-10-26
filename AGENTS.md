@@ -35,3 +35,4 @@ verified, tried, and decided belongs in the commit message and the PR body.
 ## This repo
 
 - **Never write `local.ini` wholesale.** It is the last file in CouchDB's config chain, so CouchDB persists the hashed admin password, the server `uuid` and the cookie `secret` there; regenerating it re-rolls all three. Package-owned settings go in `00-startos.ini`, which must keep sorting before it.
+- **The root `Dockerfile` is a CA override with an expiry date, not the package's image.** It is `couchdb:<tag>` with two compromised emSign roots deselected, because Debian trixie still trusts them. The upstream tag therefore lives in its `FROM` line rather than in `images.main.source`. Delete it — and restore `dockerTag` — once trixie ships a fixed `ca-certificates`; `UPDATING.md` § The CA override has the check. A packed `.s9pk` carries whatever trust store it was built with, so this only moves on a rebuild.
