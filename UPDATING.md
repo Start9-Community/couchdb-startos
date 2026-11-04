@@ -18,4 +18,3 @@ Read the release notes at <https://docs.couchdb.org/en/stable/whatsnew/> before 
 
 1. Set `images.main.source.dockerTag` in `startos/manifest/index.ts` to `couchdb:<tag>`.
 2. Set `version` in `startos/versions/current.ts` to `<X.Y.Z>:0` — the three-part CouchDB version, dropping any fourth rebuild digit. A rebuild-only change (`X.Y.Z.N`) keeps the upstream part and bumps the downstream revision instead.
-3. Write the release notes in every locale.
